@@ -9,18 +9,11 @@ using namespace std;
 
 int eq_solver(double a, double b, double c, double* x1, double* x2);
 bool is_equal(double a, double b);
+void test_eq_solver();
 
 int main()
 {
     double a, b, c, x1 = 0, x2 = 0;
-
-    assert(eq_solver(0, 0, 0, &x1, &x2) == INFINITY_ROOTS);
-    assert(eq_solver(0, 0, 0.000001, &x1, &x2) == 0);
-    assert(eq_solver(0, 0, 0.00000001, &x1, &x2) == INFINITY_ROOTS);
-    assert(eq_solver(0, -3, 1, &x1, &x2) == 1 && is_equal(x1, (double)1/3));
-    assert(eq_solver(1, 1, 1, &x1, &x2) == 0);
-    assert(eq_solver(2, 4, 2, &x1, &x2) == 1 && is_equal(x1, -1));
-    assert(eq_solver(1, 5, 4, &x1, &x2) == 2 && is_equal(x1, -4) && is_equal(x2, -1));
 
     cout << "Quadratic equation solver" << endl << endl;
     cout << "Input coefficients of equation a*x^2 + b*x + c = 0" << endl;
@@ -116,4 +109,18 @@ bool is_equal(const double a, const double b)
         return true;
     else
         return false;
+}
+
+
+void test_eq_solver()
+{
+    double x1 = 0, x2 = 0;
+
+    assert(eq_solver(0, 0, 0, &x1, &x2) == INFINITY_ROOTS);
+    assert(eq_solver(0, 0, 0.000001, &x1, &x2) == 0);
+    assert(eq_solver(0, 0, 0.00000001, &x1, &x2) == INFINITY_ROOTS);
+    assert(eq_solver(0, -3, 1, &x1, &x2) == 1 && is_equal(x1, (double)1/3));
+    assert(eq_solver(1, 1, 1, &x1, &x2) == 0);
+    assert(eq_solver(2, 4, 2, &x1, &x2) == 1 && is_equal(x1, -1));
+    assert(eq_solver(1, 5, 4, &x1, &x2) == 2 && is_equal(x1, -4) && is_equal(x2, -1));
 }
