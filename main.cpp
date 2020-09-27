@@ -2,61 +2,84 @@
 #include <cmath>
 #include <assert.h>
 
-using namespace std;
-
+/**
+    Used for description of infinity number of roots in equation
+*/
 #define INFINITY_ROOTS -1
+
+/**
+    Used for comparison of two float numbers
+*/
 #define EPS 1e-7
 
+
+/**
+    Solves the quadratic equation ax^2 + bx + c = 0
+
+    \param a  [in]  a-coefficient
+    \param b  [in]  b-coefficient
+    \param c  [in]  c-coefficient
+    \param x1 [out] Pointer to the first root
+    \param x2 [out] Pointer to the second root
+
+    \return Number of roots
+
+    \note If number of roots is infinite, returns INFINITY_ROOTS
+*/
 int eq_solver(double a, double b, double c, double* x1, double* x2);
+
+
+/**
+    Checks two float or double numbers on equality
+
+    \param a [in] First number
+    \param b [in] Second number
+
+    \return True if a is equal to b or false otherwise
+
+    \note Comparison is done with precision EPS
+*/
 bool is_equal(double a, double b);
+
+
+/**
+    Checks work of function "eq_solver" with asserts
+*/
 void test_eq_solver();
 
 int main()
 {
     double a, b, c, x1 = 0, x2 = 0;
 
-    cout << "Quadratic equation solver" << endl << endl;
-    cout << "Input coefficients of equation a*x^2 + b*x + c = 0" << endl;
-    cout << endl << "a = ";
-    cin >> a;
-    cout << endl << "b = ";
-    cin >> b;
-    cout << endl << "c = ";
-    cin >> c;
-    cout << endl;
+    std::cout << "Quadratic equation solver\n\n";
+    std::cout << "Input coefficients of equation a*x^2 + b*x + c = 0\n";
+    std::cout << "\na = ";
+    std::cin >> a;
+    std::cout << "\nb = ";
+    std::cin >> b;
+    std::cout << "\nc = ";
+    std::cin >> c;
+    std::cout << std::endl;
 
     int num_roots = eq_solver(a, b, c, &x1, &x2);
 
     if(num_roots == INFINITY_ROOTS)
-        cout << "Infinity roots" << endl;
+        std::cout << "Infinity roots\n";
     else if(num_roots == 0)
-        cout << "No roots" << endl;
+        std::cout << "No roots\n";
     else if(num_roots == 1)
-        cout << "One root: x = " << x1 << endl;
+        std::cout << "One root: x = " << x1 << std::endl;
     else
-        cout << "Two roots: x1 = " << x1 << ", x2 = " << x2 << endl;
+        std::cout << "Two roots: x1 = " << x1 << ", x2 = " << x2 << std::endl;
     return 0;
 }
 
 
-/*!
-    Solves the quadratic equation ax^2 + bx + c = 0
-    /param a  [in]  a-coefficient
-    /param b  [in]  b-coefficient
-    /param c  [in]  c-coefficient
-    /param x1 [out] Pointer to the first root
-    /param x2 [out] Pointer to the second root
-
-    /return Number of roots
-
-    /note If number of roots is infinite, returns INFINITY_ROOTS
-*/
-
 int eq_solver(double a, double b, double c, double* x1, double* x2)
 {
-    assert(isfinite(a));
-    assert(isfinite(b));
-    assert(isfinite(c));
+    assert(std::isfinite(a));
+    assert(std::isfinite(b));
+    assert(std::isfinite(c));
     assert(x1 != NULL);
     assert(x2 != NULL);
     assert(x1 != x2);
@@ -89,21 +112,10 @@ int eq_solver(double a, double b, double c, double* x1, double* x2)
 }
 
 
-/*!
-    Checks two float or double numbers on equality
-
-    /param [in] a First number
-    /param [in] b Second number
-
-    /return True if a is equal to b or false otherwise
-
-    /note Comparison is done with precision EPS
-*/
-
 bool is_equal(const double a, const double b)
 {
-    assert(isfinite(a));
-    assert(isfinite(b));
+    assert(std::isfinite(a));
+    assert(std::isfinite(b));
 
     if(a > b - EPS && a < b + EPS)
         return true;
